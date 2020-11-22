@@ -8,7 +8,7 @@ import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class DatabaseViewModel(application: Application): AndroidViewModel(application) {
+class SubjectViewModel(application: Application): AndroidViewModel(application) {
 
     val readAllData: LiveData<List<Subject>>
     private val repository: AppRepository
@@ -30,6 +30,12 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
         //to runn different thread
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateSubject(subject)
+        }
+    }
+
+    fun deleteSubject(subject: Subject){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteSubject(subject)
         }
     }
 

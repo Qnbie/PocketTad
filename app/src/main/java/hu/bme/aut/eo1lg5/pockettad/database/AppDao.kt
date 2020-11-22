@@ -29,7 +29,7 @@ interface AppDao {
 
     //Requirement
     @Query("SELECT * FROM requirements")
-    fun getAllReq(): List<Requirement>
+    fun getAllReq(): LiveData<List<Requirement>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addRequirement(requirement: Requirement): Long
     @Update
@@ -39,7 +39,7 @@ interface AppDao {
 
     //Toods
     @Query("SELECT * FROM todo")
-    fun getAllToDo(): List<ToDo>
+    fun getAllToDo(): LiveData<List<ToDo>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addToDo(todo: ToDo): Long
     @Update

@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.DatabaseViewModel
+import hu.bme.aut.eo1lg5.pockettad.database.SubjectViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
 import kotlinx.android.synthetic.main.fragment_subject_update.*
 import kotlinx.android.synthetic.main.fragment_subject_update.view.*
 
 class SubjectUpdateFragment : Fragment() {
-    private lateinit var databaseViewModel: DatabaseViewModel
+    private lateinit var subjectViewModel: SubjectViewModel
     private lateinit var args: Subject
 
     override fun onCreateView(
@@ -23,7 +23,7 @@ class SubjectUpdateFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_subject_update, container, false)
 
-        databaseViewModel = ViewModelProvider(this).get(DatabaseViewModel::class.java)
+        subjectViewModel = ViewModelProvider(this).get(SubjectViewModel::class.java)
 
         view.updateSubName.setText( args.name)
         view.updateSubDesc.setText(args.description)
@@ -42,7 +42,7 @@ class SubjectUpdateFragment : Fragment() {
         val web = updateSubWeb.text.toString()
 
         val updatedSubject = Subject(args.id,name,desc,web,args.done)
-        databaseViewModel.updateSubject(updatedSubject)
+        subjectViewModel.updateSubject(updatedSubject)
         //TODO back to prew view
     }
 }

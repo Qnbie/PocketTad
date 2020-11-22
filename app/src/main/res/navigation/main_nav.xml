@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/subAddFragment"
-        android:name="hu.bme.aut.eo1lg5.pockettad.fragments.add.subAddFragment"
+        android:name="hu.bme.aut.eo1lg5.pockettad.fragments.add.SubjectAddFragment"
         android:label="Add Subject"
         tools:layout="@layout/fragment_subject_add" >
         <action
