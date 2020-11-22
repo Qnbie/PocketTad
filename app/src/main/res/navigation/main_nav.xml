@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/subListFragment">
+
+    <fragment
+        android:id="@+id/subAddFragment"
+        android:name="hu.bme.aut.eo1lg5.pockettad.fragments.add.subAddFragment"
+        android:label="Add Subject"
+        tools:layout="@layout/fragment_subject_add" >
+        <action
+            android:id="@+id/action_subAddFragment_to_subListFragment"
+            app:destination="@id/subListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subListFragment"
+        android:name="hu.bme.aut.eo1lg5.pockettad.fragments.subjectlist.SubjectListFragment"
+        android:label="Subject List"
+        tools:layout="@layout/fragment_subject_list" >
+        <action
+            android:id="@+id/action_subListFragment_to_subAddFragment"
+            app:destination="@id/subAddFragment" />
+    </fragment>
+</navigation>
