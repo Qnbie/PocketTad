@@ -1,4 +1,4 @@
-package hu.bme.aut.eo1lg5.pockettad.fragments.todolist
+package hu.bme.aut.eo1lg5.pockettad.fragments.lists
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.RequirementViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.ToDoViewModel
-import hu.bme.aut.eo1lg5.pockettad.fragments.requirementlist.RequirementListAdapter
+import hu.bme.aut.eo1lg5.pockettad.recyclerview.ToDoListAdapter
 import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 
 class ToDoListFragment : Fragment() {

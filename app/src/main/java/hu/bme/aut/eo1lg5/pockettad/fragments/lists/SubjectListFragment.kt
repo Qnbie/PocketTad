@@ -1,4 +1,4 @@
-package hu.bme.aut.eo1lg5.pockettad.fragments.subjectlist
+package hu.bme.aut.eo1lg5.pockettad.fragments.lists
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.SubjectViewModel
+import hu.bme.aut.eo1lg5.pockettad.recyclerview.SubjectListAdapter
 import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 
 class SubjectListFragment : Fragment() {
@@ -25,7 +26,8 @@ class SubjectListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_subject_list,container,false)
 
         //RecyclerView
-        val adapter = SubjectListAdapter()
+        val adapter =
+            SubjectListAdapter()
         val recyclerView = view.rvListFragment
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

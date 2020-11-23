@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.RequirementViewModel
-import hu.bme.aut.eo1lg5.pockettad.database.ToDoViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
-import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
 import kotlinx.android.synthetic.main.fragment_subject_add.view.*
 import kotlinx.android.synthetic.main.fragment_to_do_add.*
 
@@ -22,7 +21,7 @@ class RequirementAddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_to_do_add, container, false)
+        val view = inflater.inflate(R.layout.fragment_requirement_add, container, false)
 
         requirementViewModel = ViewModelProvider(this).get(RequirementViewModel::class.java)
 
@@ -40,6 +39,6 @@ class RequirementAddFragment : Fragment() {
 
         val requirement = Requirement(0, 0, name, desc, false)
         requirementViewModel.addRequirement(requirement)
-        //findNavController().navigate(R.id.action_toDoAddFragment_to_toDoListFragment)
+        findNavController().navigate(R.id.action_requirementAddFragment_to_subjectDetailFragment)
     }
 }

@@ -8,4 +8,6 @@
     <string name="webpage">WebPage</string>
     <string name="add">Add</string>
     <string name="update">Update</string>
+    <string name="add_requiement">Add Requiement</string>
+    <string name="add_todo">Add ToDo</string>
 </resources>

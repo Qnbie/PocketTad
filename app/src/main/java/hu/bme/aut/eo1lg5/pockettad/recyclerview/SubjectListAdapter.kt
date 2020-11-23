@@ -1,4 +1,5 @@
-package hu.bme.aut.eo1lg5.pockettad.fragments.subjectlist
+package hu.bme.aut.eo1lg5.pockettad.recyclerview
+
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
+
 
 class SubjectListAdapter: RecyclerView.Adapter<SubjectListAdapter.ViewHolder>() {
     private var subjectList= emptyList<Subject>()
@@ -32,7 +34,6 @@ class SubjectListAdapter: RecyclerView.Adapter<SubjectListAdapter.ViewHolder>() 
 
         holder.parentLayout.setOnClickListener(View.OnClickListener {
             Log.d(TAG, "Cilck on ${subjectList.get(position).toString()}")
-            //TODO move to another activity
         })
     }
 

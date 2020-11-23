@@ -45,7 +45,7 @@ class ToDoAddFragment : Fragment() {
 
         val todo = ToDo(0, 0, name, desc, false)
         todoViewModel.addToDo(todo)
-        //findNavController().navigate(R.id.action_toDoAddFragment_to_toDoListFragment)
+        findNavController().navigate(R.id.action_toDoAddFragment_to_requirementDetailFragment)
     }
 
 }

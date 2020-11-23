@@ -1,4 +1,4 @@
-package hu.bme.aut.eo1lg5.pockettad.fragments.requirementlist
+package hu.bme.aut.eo1lg5.pockettad.recyclerview
 
 import android.content.ContentValues
 import android.util.Log
@@ -9,12 +9,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
-import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
-import hu.bme.aut.eo1lg5.pockettad.fragments.subjectlist.SubjectListAdapter
+import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
 
-class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewHolder>() {
-    private var requirementList= emptyList<Requirement>()
+class ToDoListAdapter: RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
+    private var toDoList= emptyList<ToDo>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemName: TextView = view.findViewById(R.id.itemName)
@@ -22,28 +20,28 @@ class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewH
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.reqlist_listitem, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.todolist_listitem, parent, false)
         return ViewHolder(
             view
         )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = requirementList[position]
+        val currentItem = toDoList[position]
         holder.itemName.text = currentItem.name.toString()
 
         holder.parentLayout.setOnClickListener(View.OnClickListener {
-            Log.d(ContentValues.TAG, "Cilck on ${requirementList.get(position).toString()}")
+            Log.d(ContentValues.TAG, "Cilck on ${toDoList.get(position).toString()}")
             //TODO move to another activity
         })
     }
 
     override fun getItemCount(): Int {
-        return requirementList.size
+        return toDoList.size
     }
 
-    fun setReqList(reuirement: List<Requirement>){
-        requirementList = reuirement
+    fun setToDoList(toDo: List<ToDo>){
+        toDoList = toDo
         notifyDataSetChanged()
     }
 }
