@@ -1,5 +1,6 @@
 package hu.bme.aut.eo1lg5.pockettad.fragments.detail
 
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,28 +28,32 @@ class SubjectDetailFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_subject_detail, container, false)
 
-        view.subjectName.setText(args.currentSubject.name)
-        view.subjectDesc.setText(args.currentSubject.description)
-        view.subjectWeb.setText(args.currentSubject.webpage)
+        view.subjectName.setText(args.currentSubject?.name)
+        view.subjectDesc.setText(args.currentSubject?.description)
+        view.subjectWeb.setText(args.currentSubject?.webpage)
 
-        val adapter =
-            RequirementListAdapter()
+        val adapter = RequirementListAdapter()
         val recyclerView = view.requiementList
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         requirementViewModel = ViewModelProvider(this).get(RequirementViewModel::class.java)
-        requirementViewModel.readAllData.observe(viewLifecycleOwner, Observer { requirement->
-            adapter.setReqList(requirement)
-        })
-
-        view.addRequirement.setOnClickListener{
-            findNavController().navigate(R.id.action_subjectDetailFragment_to_requirementAddFragment)
+        args.currentSubject?.id?.let {
+            requirementViewModel.getReqBySubId(it).observe(viewLifecycleOwner, Observer { requirement->
+                adapter.setReqList(requirement)
+            })
         }
 
-        view.updateSubject.setOnClickListener {
-            val action = SubjectDetailFragmentDirections.actionSubjectDetailFragmentToSubjectUpdateFragment(args.currentSubject)
-            findNavController().navigate(action)
+
+        view.addRequirement.setOnClickListener{
+            val action = args.currentSubject?.id?.let { it1 ->
+                SubjectDetailFragmentDirections.actionSubjectDetailFragmentToRequirementAddFragment(
+                    it1
+                )
+            }
+            if (action != null) {
+                findNavController().navigate(action)
+            }
         }
 
         return view

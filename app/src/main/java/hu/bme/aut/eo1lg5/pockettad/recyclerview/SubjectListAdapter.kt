@@ -1,18 +1,16 @@
 package hu.bme.aut.eo1lg5.pockettad.recyclerview
 
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
-import hu.bme.aut.eo1lg5.pockettad.fragments.lists.SubjectListFragment
+import hu.bme.aut.eo1lg5.pockettad.fragments.detail.SubjectDetailFragmentDirections
 import hu.bme.aut.eo1lg5.pockettad.fragments.lists.SubjectListFragmentDirections
 import kotlinx.android.synthetic.main.sublist_listitem.view.*
 
@@ -33,12 +31,17 @@ class SubjectListAdapter: RecyclerView.Adapter<SubjectListAdapter.ViewHolder>() 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = subjectList[position]
-        holder.itemName.text = currentItem.name.toString()
+        holder.itemName.text = currentItem.name
 
         holder.itemView.subListItem.setOnClickListener(View.OnClickListener {
             val action = SubjectListFragmentDirections.actionSubListFragmentToSubjectDetailFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         })
+
+        holder.itemView.settingsButton.setOnClickListener{
+            val action = SubjectListFragmentDirections.actionSubListFragmentToSubjectUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

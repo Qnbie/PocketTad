@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.RequirementViewModel
@@ -28,11 +30,15 @@ class RequirementUpdateFragment : Fragment() {
 
         requirementViewModel = ViewModelProvider(this).get(RequirementViewModel::class.java)
 
-        view.updateReqName.setText( args.currentRequirement.name)
-        view.updateReqDesc.setText(args.currentRequirement.desc)
+        view.updateReqName.setText( args.currentRequirement?.name)
+        view.updateReqDesc.setText(args.currentRequirement?.desc)
 
         view.bUpdate.setOnClickListener{
             updateRequirement()
+        }
+
+        view.bDelete.setOnClickListener {
+            deleteRequirement()
         }
 
         return view
@@ -42,8 +48,24 @@ class RequirementUpdateFragment : Fragment() {
         val name = updateReqName.text.toString()
         val desc = updateReqDesc.text.toString()
 
-        val updatedRequirement = Requirement(args.currentRequirement.id,args.currentRequirement.subjectId,name,desc,args.currentRequirement.done)
-        requirementViewModel.updateRequirement(updatedRequirement)
-        //TODO back to prew view
+        val updatedRequirement = args.currentRequirement?.done?.let {
+            Requirement(
+                args.currentRequirement!!.id, args.currentRequirement!!.subjectId,name,desc,
+                it
+            )
+        }
+        if (updatedRequirement != null) {
+            requirementViewModel.updateRequirement(updatedRequirement)
+        }
+        findNavController().navigateUp()
+    }
+
+    private fun deleteRequirement(){
+        args.currentRequirement?.let { requirementViewModel.deleteRequirement(it) }
+        Toast.makeText(
+            requireContext(),
+            "${args.currentRequirement?.name} deleted",
+            Toast.LENGTH_SHORT).show()
+        findNavController().navigateUp()
     }
 }

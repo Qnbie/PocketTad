@@ -14,6 +14,6 @@ data class Requirement (
     val subjectId: Long?,
     val name: String,
     val desc: String,
-    //val deadLine: Date,
+    //val deadLine: String,
     val done: Boolean
 ) : Parcelable

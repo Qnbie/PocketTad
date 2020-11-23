@@ -9,11 +9,7 @@
         android:id="@+id/subAddFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.add.SubjectAddFragment"
         android:label="Add Subject"
-        tools:layout="@layout/fragment_subject_add" >
-        <action
-            android:id="@+id/action_subAddFragment_to_subListFragment"
-            app:destination="@id/subListFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_subject_add" />
     <fragment
         android:id="@+id/subListFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.lists.SubjectListFragment"
@@ -25,101 +21,96 @@
         <action
             android:id="@+id/action_subListFragment_to_subjectDetailFragment"
             app:destination="@id/subjectDetailFragment" />
+        <action
+            android:id="@+id/action_subListFragment_to_subjectUpdateFragment"
+            app:destination="@id/subjectUpdateFragment" />
     </fragment>
     <fragment
         android:id="@+id/subjectDetailFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.detail.SubjectDetailFragment"
-        android:label="fragment_subject_detail"
+        android:label="Subject Detail"
         tools:layout="@layout/fragment_subject_detail" >
-        <action
-            android:id="@+id/action_subjectDetailFragment_to_subListFragment"
-            app:destination="@id/subListFragment" />
         <action
             android:id="@+id/action_subjectDetailFragment_to_requirementAddFragment"
             app:destination="@id/requirementAddFragment" />
         <action
             android:id="@+id/action_subjectDetailFragment_to_requirementDetailFragment"
             app:destination="@id/requirementDetailFragment" />
-        <action
-            android:id="@+id/action_subjectDetailFragment_to_subjectUpdateFragment"
-            app:destination="@id/subjectUpdateFragment" />
         <argument
             android:name="currentSubject"
-            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Subject" />
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Subject"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <action
+            android:id="@+id/action_subjectDetailFragment_to_requirementUpdateFragment"
+            app:destination="@id/requirementUpdateFragment" />
     </fragment>
     <fragment
         android:id="@+id/toDoAddFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.add.ToDoAddFragment"
-        android:label="ToDoAddFragment"
+        android:label="Add ToDo"
         tools:layout="@layout/fragment_to_do_add">
-        <action
-            android:id="@+id/action_toDoAddFragment_to_requirementDetailFragment"
-            app:destination="@id/requirementDetailFragment" />
+        <argument
+            android:name="requirementId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/requirementAddFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.add.RequirementAddFragment"
-        android:label="RequirementAddFragment"
+        android:label="Add Requirement"
         tools:layout="@layout/fragment_requirement_add">
-        <action
-            android:id="@+id/action_requirementAddFragment_to_subjectDetailFragment"
-            app:destination="@id/subjectDetailFragment" />
+        <argument
+            android:name="subjectId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/requirementDetailFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.detail.RequirementDetailFragment"
-        android:label="fragment_requirement_detail"
+        android:label="Requirement Detail"
         tools:layout="@layout/fragment_requirement_detail" >
-        <action
-            android:id="@+id/action_requirementDetailFragment_to_subjectDetailFragment"
-            app:destination="@id/subjectDetailFragment" />
         <action
             android:id="@+id/action_requirementDetailFragment_to_toDoAddFragment"
             app:destination="@id/toDoAddFragment" />
-        <action
-            android:id="@+id/action_requirementDetailFragment_to_requirementUpdateFragment"
-            app:destination="@id/requirementUpdateFragment" />
         <action
             android:id="@+id/action_requirementDetailFragment_to_toDoUpdateFragment"
             app:destination="@id/toDoUpdateFragment" />
         <argument
             android:name="currentRequirement"
-            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Requirement" />
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Requirement"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/subjectUpdateFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.update.SubjectUpdateFragment"
-        android:label="fragment_to_do_update"
+        android:label="Update Subject"
         tools:layout="@layout/fragment_to_do_update" >
-        <action
-            android:id="@+id/action_subjectUpdateFragment_to_subjectDetailFragment"
-            app:destination="@id/subjectDetailFragment" />
         <argument
             android:name="currentSubject"
-            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Subject" />
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Subject"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/requirementUpdateFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.update.RequirementUpdateFragment"
-        android:label="RequirementUpdateFragment"
+        android:label="Update Requirement"
         tools:layout="@layout/fragment_requirement_update">
-        <action
-            android:id="@+id/action_requirementUpdateFragment_to_requirementDetailFragment"
-            app:destination="@id/requirementDetailFragment" />
         <argument
             android:name="currentRequirement"
-            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Requirement" />
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Requirement"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
     <fragment
         android:id="@+id/toDoUpdateFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.update.ToDoUpdateFragment"
-        android:label="ToDoUpdateFragment"
+        android:label="Update ToDo"
         tools:layout="@layout/fragment_to_do_update">
-        <action
-            android:id="@+id/action_toDoUpdateFragment_to_requirementDetailFragment"
-            app:destination="@id/requirementDetailFragment" />
         <argument
             android:name="currentToDo"
-            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.ToDo" />
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.ToDo"
+            app:nullable="true"
+            android:defaultValue="@null"/>
     </fragment>
 </navigation>

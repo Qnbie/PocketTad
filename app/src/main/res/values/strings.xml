@@ -11,4 +11,6 @@
     <string name="add_requiement">Add Requiement</string>
     <string name="add_todo">Add ToDo</string>
     <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="done">Done</string>
 </resources>

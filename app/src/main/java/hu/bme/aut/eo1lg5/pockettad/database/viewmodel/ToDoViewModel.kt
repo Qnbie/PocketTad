@@ -43,4 +43,8 @@ class ToDoViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun getToDoByReqId(reqId: Long):LiveData<List<ToDo>>{
+        return repository.getToDoByReqId(reqId)
+    }
+
 }

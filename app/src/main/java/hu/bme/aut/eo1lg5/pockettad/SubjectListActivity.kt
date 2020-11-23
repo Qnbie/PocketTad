@@ -1,5 +1,6 @@
 package hu.bme.aut.eo1lg5.pockettad
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
@@ -13,11 +14,11 @@ class SubjectListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject_list)
 
-        setupActionBarWithNavController(findNavController(R.id.fragment))
+        setupActionBarWithNavController(findNavController(R.id.mainFragment))
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.fragment)
+        val navController = findNavController(R.id.mainFragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

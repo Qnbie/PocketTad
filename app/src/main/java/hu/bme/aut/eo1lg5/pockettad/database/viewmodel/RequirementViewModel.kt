@@ -24,14 +24,12 @@ class RequirementViewModel(application: Application): AndroidViewModel(applicati
     }
 
     fun addRequirement(requirement: Requirement){
-        //to runn different thread
         viewModelScope.launch(Dispatchers.IO) {
             repository.addRequirement(requirement)
         }
     }
 
     fun updateRequirement(requirement: Requirement){
-        //to runn different thread
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateRequirement(requirement)
         }
@@ -41,6 +39,10 @@ class RequirementViewModel(application: Application): AndroidViewModel(applicati
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteRequirement(requirement)
         }
+    }
+
+    fun getReqBySubId(subId: Long):LiveData<List<Requirement>>{
+        return repository.getReqBySubId(subId)
     }
 
 }

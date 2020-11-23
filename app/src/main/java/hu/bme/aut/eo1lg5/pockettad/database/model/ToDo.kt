@@ -14,6 +14,6 @@ data class ToDo (
     val requirementId: Long?,
     val name: String,
     val description: String,
-    //val deadLine: Date?,
+    //val deadLine: String,
     val done: Boolean
 ) : Parcelable {}

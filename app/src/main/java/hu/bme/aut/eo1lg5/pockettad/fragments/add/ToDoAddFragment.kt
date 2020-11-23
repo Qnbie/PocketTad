@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.ToDoViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_to_do_add.*
 
 class ToDoAddFragment : Fragment() {
     private lateinit var todoViewModel: ToDoViewModel
+    private val args by navArgs<ToDoAddFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +39,10 @@ class ToDoAddFragment : Fragment() {
         val desc = addToDoDesc.text.toString()
 
 
-        val todo = ToDo(0, 0, name, desc, false)
+        val todo = ToDo(null, args.requirementId, name, desc, false)
         todoViewModel.addToDo(todo)
-        findNavController().navigate(R.id.action_toDoAddFragment_to_requirementDetailFragment)
+        //findNavController().navigate(R.id.action_toDoAddFragment_to_requirementDetailFragment)
+        findNavController().navigateUp()
     }
 
 }

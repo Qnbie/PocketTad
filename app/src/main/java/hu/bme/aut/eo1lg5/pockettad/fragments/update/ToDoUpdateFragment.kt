@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.ToDoViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
 import kotlinx.android.synthetic.main.fragment_requirement_update.view.bUpdate
+import kotlinx.android.synthetic.main.fragment_subject_update.view.*
 import kotlinx.android.synthetic.main.fragment_to_do_update.*
 import kotlinx.android.synthetic.main.fragment_to_do_update.view.*
+import kotlinx.android.synthetic.main.fragment_to_do_update.view.bDelete
 
 
 class ToDoUpdateFragment : Fragment() {
@@ -29,11 +33,15 @@ class ToDoUpdateFragment : Fragment() {
 
         toDoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
 
-        view.updateToDoName.setText( args.currentToDo.name)
-        view.updateToDoDesc.setText(args.currentToDo.description)
+        view.updateToDoName.setText( args.currentToDo?.name)
+        view.updateToDoDesc.setText(args.currentToDo?.description)
 
         view.bUpdate.setOnClickListener{
             updateToDo()
+        }
+
+        view.bDelete.setOnClickListener{
+            deleteToDo()
         }
 
         return view
@@ -43,8 +51,24 @@ class ToDoUpdateFragment : Fragment() {
         val name = updateToDoName.text.toString()
         val desc = updateToDoDesc.text.toString()
 
-        val updatedToDo = ToDo(args.currentToDo.id,args.currentToDo.requirementId,name,desc,args.currentToDo.done)
-        toDoViewModel.updateToDo(updatedToDo)
-        //TODO back to prew view
+        val updatedToDo = args.currentToDo?.done?.let {
+            ToDo(
+                args.currentToDo!!.id, args.currentToDo!!.requirementId,name,desc,
+                it
+            )
+        }
+        if (updatedToDo != null) {
+            toDoViewModel.updateToDo(updatedToDo)
+        }
+        findNavController().navigateUp()
+    }
+
+    private fun deleteToDo(){
+        args.currentToDo?.let { toDoViewModel.deleteToDo(it) }
+        Toast.makeText(
+            requireContext(),
+            "${args.currentToDo?.name} deleted",
+            Toast.LENGTH_SHORT).show()
+        findNavController().navigateUp()
     }
 }

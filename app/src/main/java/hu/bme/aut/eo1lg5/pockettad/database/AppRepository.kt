@@ -1,6 +1,9 @@
 package hu.bme.aut.eo1lg5.pockettad.database
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
+import com.google.android.material.tabs.TabLayout
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
 import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
@@ -15,11 +18,13 @@ class AppRepository(private val appDao: AppDao){
         appDao.addSubject(subject)
     }
 
-    suspend fun updateSubject(subject: Subject){
+    fun updateSubject(subject: Subject){
         appDao.updateSubject(subject)
     }
 
     fun deleteSubject(subject: Subject) {
+        appDao.deleteToDoBySubId(subject.id)
+        appDao.deleteReqBySubId(subject.id)
         appDao.deleteSubject(subject)
     }
 
@@ -32,7 +37,12 @@ class AppRepository(private val appDao: AppDao){
     }
 
     fun deleteRequirement(requirement: Requirement) {
+        appDao.deleteToDoByReqId(requirement.id)
         appDao.deleteRequirement(requirement)
+    }
+
+    fun getReqBySubId(long: Long): LiveData<List<Requirement>> {
+        return appDao.getReqBySubId(long)
     }
 
     fun addToDo(toDo: ToDo) {
@@ -45,5 +55,9 @@ class AppRepository(private val appDao: AppDao){
 
     fun deleteToDo(toDo: ToDo) {
         appDao.deleteToDo(toDo)
+    }
+
+    fun getToDoByReqId(reqId: Long): LiveData<List<ToDo>> {
+        return appDao.getToDoByReqId(reqId)
     }
 }

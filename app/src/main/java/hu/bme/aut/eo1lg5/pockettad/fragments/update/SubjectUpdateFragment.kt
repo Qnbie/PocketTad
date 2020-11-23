@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -27,12 +28,16 @@ class SubjectUpdateFragment : Fragment() {
 
         subjectViewModel = ViewModelProvider(this).get(SubjectViewModel::class.java)
 
-        view.updateSubName.setText( args.currentSubject.name)
-        view.updateSubDesc.setText(args.currentSubject.description)
-        view.updateSubWeb.setText(args.currentSubject.webpage)
+        view.updateSubName.setText( args.currentSubject?.name)
+        view.updateSubDesc.setText(args.currentSubject?.description)
+        view.updateSubWeb.setText(args.currentSubject?.webpage)
 
         view.bUpdate.setOnClickListener{
             updateSubject()
+        }
+
+        view.bDelete.setOnClickListener{
+            deleteSubject()
         }
 
         return view
@@ -43,8 +48,25 @@ class SubjectUpdateFragment : Fragment() {
         val desc = updateSubDesc.text.toString()
         val web = updateSubWeb.text.toString()
 
-        val updatedSubject = Subject(args.currentSubject.id,name,desc,web,args.currentSubject.done)
-        subjectViewModel.updateSubject(updatedSubject)
-        findNavController().navigate(R.id.action_subjectUpdateFragment_to_subjectDetailFragment)
+        val updatedSubject =
+            args.currentSubject?.done?.let {
+                Subject(
+                    args.currentSubject!!.id,name,desc,web,
+                    it
+                )
+            }
+        if (updatedSubject != null) {
+            subjectViewModel.updateSubject(updatedSubject)
+        }
+        findNavController().navigateUp()
+    }
+
+    private fun deleteSubject(){
+        args.currentSubject?.let { subjectViewModel.deleteSubject(it) }
+        Toast.makeText(
+            requireContext(),
+            "${args.currentSubject?.name} deleted",
+            Toast.LENGTH_SHORT).show()
+        findNavController().navigateUp()
     }
 }

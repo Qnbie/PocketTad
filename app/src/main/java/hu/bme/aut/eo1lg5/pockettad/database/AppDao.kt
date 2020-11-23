@@ -12,8 +12,8 @@ interface AppDao {
     //Subject
     @Query("SELECT * FROM subject_table")
     fun getAllSubject(): LiveData<List<Subject>>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addSubject(subject: Subject): Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addSubject(subject: Subject): Long
     @Update
     fun updateSubject(subject: Subject)
     @Delete
@@ -28,6 +28,10 @@ interface AppDao {
     fun updateRequirement(requirement: Requirement)
     @Delete
     fun deleteRequirement(requirement: Requirement)
+    @Query("SELECT * FROM requirement_table WHERE subjectId = :subId")
+    fun getReqBySubId(subId: Long?): LiveData<List<Requirement>>
+    @Query("DELETE FROM requirement_table  WHERE subjectId = :subId")
+    fun deleteReqBySubId(subId: Long?)
 
     //Toods
     @Query("SELECT * FROM todo_table")
@@ -38,4 +42,10 @@ interface AppDao {
     fun updateToDo(todo: ToDo)
     @Delete
     fun deleteToDo(todo: ToDo)
+    @Query("SELECT * FROM todo_table  WHERE requirementId = :reqId")
+    fun getToDoByReqId(reqId: Long): LiveData<List<ToDo>>
+    @Query("DELETE FROM todo_table  WHERE requirementId = :reqId")
+    fun deleteToDoByReqId(reqId: Long?)
+    @Query("DELETE FROM todo_table WHERE requirementId IN (SELECT id FROM requirement_table WHERE subjectId = :subId)")
+    fun deleteToDoBySubId(subId: Long?)
 }

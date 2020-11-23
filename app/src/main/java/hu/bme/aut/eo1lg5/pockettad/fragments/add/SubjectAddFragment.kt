@@ -38,9 +38,9 @@ class SubjectAddFragment : Fragment() {
         val desc = addSubDesc.text.toString()
         val web = addSubWeb.text.toString()
 
-        val subject = Subject(0, name,desc,web,false)
+        val subject = Subject(null, name,desc,web,false)
         subjectViewModel.addSubject(subject)
-        findNavController().navigate(R.id.action_subAddFragment_to_subListFragment)
+        findNavController().navigateUp()
     }
 
 }

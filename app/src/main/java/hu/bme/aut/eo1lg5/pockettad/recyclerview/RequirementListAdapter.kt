@@ -1,24 +1,28 @@
 package hu.bme.aut.eo1lg5.pockettad.recyclerview
 
-import android.content.ContentValues
-import android.util.Log
+
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
+import android.widget.Switch
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
 import hu.bme.aut.eo1lg5.pockettad.fragments.detail.SubjectDetailFragmentDirections
+import hu.bme.aut.eo1lg5.pockettad.fragments.lists.SubjectListFragmentDirections
 import kotlinx.android.synthetic.main.reqlist_listitem.view.*
+import kotlinx.android.synthetic.main.reqlist_listitem.view.settingsButton
+import kotlinx.android.synthetic.main.sublist_listitem.view.*
 
 class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewHolder>() {
     private var requirementList= emptyList<Requirement>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemName: TextView = view.findViewById(R.id.itemName)
+        val switchDone: Switch = view.findViewById(R.id.switchDone)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,11 +35,17 @@ class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewH
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = requirementList[position]
         holder.itemName.text = currentItem.name.toString()
+        holder.switchDone.setChecked(currentItem.done)
 
         holder.itemView.reqListItem.setOnClickListener(View.OnClickListener {
             val action = SubjectDetailFragmentDirections.actionSubjectDetailFragmentToRequirementDetailFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         })
+
+        holder.itemView.settingsButton.setOnClickListener{
+            val action = SubjectDetailFragmentDirections.actionSubjectDetailFragmentToRequirementUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

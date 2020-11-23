@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import hu.bme.aut.eo1lg5.pockettad.database.AppDatabase
 import hu.bme.aut.eo1lg5.pockettad.database.AppRepository
+import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
 import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,14 +25,12 @@ class SubjectViewModel(application: Application): AndroidViewModel(application) 
     }
 
     fun addSubject(subject: Subject){
-        //to runn different thread
         viewModelScope.launch(Dispatchers.IO) {
             repository.addSubject(subject)
         }
     }
 
     fun updateSubject(subject: Subject){
-        //to runn different thread
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateSubject(subject)
         }
@@ -42,5 +41,4 @@ class SubjectViewModel(application: Application): AndroidViewModel(application) 
             repository.deleteSubject(subject)
         }
     }
-
 }
