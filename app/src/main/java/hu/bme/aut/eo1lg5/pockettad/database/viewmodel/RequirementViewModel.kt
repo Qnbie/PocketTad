@@ -1,9 +1,11 @@
-package hu.bme.aut.eo1lg5.pockettad.database
+package hu.bme.aut.eo1lg5.pockettad.database.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import hu.bme.aut.eo1lg5.pockettad.database.AppDatabase
+import hu.bme.aut.eo1lg5.pockettad.database.AppRepository
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +16,9 @@ class RequirementViewModel(application: Application): AndroidViewModel(applicati
     private val repository: AppRepository
 
     init {
-        val appDao = AppDatabase.getDatabase(application).appDao()
+        val appDao = AppDatabase.getDatabase(
+            application
+        ).appDao()
         repository = AppRepository(appDao)
         readAllData = repository.readAllRequirement
     }

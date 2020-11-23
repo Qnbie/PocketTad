@@ -7,16 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
+import hu.bme.aut.eo1lg5.pockettad.fragments.detail.RequirementDetailFragmentDirections
+import hu.bme.aut.eo1lg5.pockettad.fragments.detail.SubjectDetailFragmentDirections
+import kotlinx.android.synthetic.main.todolist_listitem.view.*
 
 class ToDoListAdapter: RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
     private var toDoList= emptyList<ToDo>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemName: TextView = view.findViewById(R.id.itemName)
-        val parentLayout: RelativeLayout = view.findViewById(R.id.baseLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,9 +33,9 @@ class ToDoListAdapter: RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
         val currentItem = toDoList[position]
         holder.itemName.text = currentItem.name.toString()
 
-        holder.parentLayout.setOnClickListener(View.OnClickListener {
-            Log.d(ContentValues.TAG, "Cilck on ${toDoList.get(position).toString()}")
-            //TODO move to another activity
+        holder.itemView.todoListItem.setOnClickListener(View.OnClickListener {
+            val action = RequirementDetailFragmentDirections.actionRequirementDetailFragmentToToDoUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
         })
     }
 

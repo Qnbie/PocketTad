@@ -1,10 +1,13 @@
 package hu.bme.aut.eo1lg5.pockettad.database.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-@Entity(tableName = "requirements")
+@Parcelize
+@Entity(tableName = "requirement_table")
 data class Requirement (
     @PrimaryKey(autoGenerate = true)
     val id: Long?,
@@ -13,4 +16,4 @@ data class Requirement (
     val desc: String,
     //val deadLine: Date,
     val done: Boolean
-)
+) : Parcelable

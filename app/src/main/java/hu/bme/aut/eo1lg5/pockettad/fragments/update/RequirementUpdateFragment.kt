@@ -6,21 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.RequirementViewModel
-import hu.bme.aut.eo1lg5.pockettad.database.SubjectViewModel
+import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.RequirementViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
-import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
 import kotlinx.android.synthetic.main.fragment_requirement_update.*
 import kotlinx.android.synthetic.main.fragment_requirement_update.view.*
-import kotlinx.android.synthetic.main.fragment_subject_update.*
-import kotlinx.android.synthetic.main.fragment_subject_update.view.*
 import kotlinx.android.synthetic.main.fragment_subject_update.view.bUpdate
 
 class RequirementUpdateFragment : Fragment() {
 
     private lateinit var requirementViewModel: RequirementViewModel
-    private lateinit var args: Requirement
+    private val args by navArgs<RequirementUpdateFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +28,8 @@ class RequirementUpdateFragment : Fragment() {
 
         requirementViewModel = ViewModelProvider(this).get(RequirementViewModel::class.java)
 
-        view.updateReqName.setText( args.name)
-        view.updateReqDesc.setText(args.desc)
+        view.updateReqName.setText( args.currentRequirement.name)
+        view.updateReqDesc.setText(args.currentRequirement.desc)
 
         view.bUpdate.setOnClickListener{
             updateRequirement()
@@ -45,7 +42,7 @@ class RequirementUpdateFragment : Fragment() {
         val name = updateReqName.text.toString()
         val desc = updateReqDesc.text.toString()
 
-        val updatedRequirement = Requirement(args.id,args.subjectId,name,desc,args.done)
+        val updatedRequirement = Requirement(args.currentRequirement.id,args.currentRequirement.subjectId,name,desc,args.currentRequirement.done)
         requirementViewModel.updateRequirement(updatedRequirement)
         //TODO back to prew view
     }

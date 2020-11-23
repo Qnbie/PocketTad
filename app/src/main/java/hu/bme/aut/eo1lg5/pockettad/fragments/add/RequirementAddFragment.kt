@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.RequirementViewModel
+import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.RequirementViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
 import kotlinx.android.synthetic.main.fragment_subject_add.view.*
 import kotlinx.android.synthetic.main.fragment_to_do_add.*

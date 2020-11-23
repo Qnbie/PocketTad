@@ -8,14 +8,6 @@ import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
 
 @Dao
 interface AppDao {
-    @Transaction
-    @Query("SELECT * FROM subject_table")
-    fun getReqToSubject(): List<Requirement>
-
-    @Transaction
-    @Query("SELECT * FROM requirements")
-    fun getToDoToReq(): List<ToDo>
-
 
     //Subject
     @Query("SELECT * FROM subject_table")
@@ -28,7 +20,7 @@ interface AppDao {
     fun deleteSubject(subject: Subject?)
 
     //Requirement
-    @Query("SELECT * FROM requirements")
+    @Query("SELECT * FROM requirement_table")
     fun getAllReq(): LiveData<List<Requirement>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addRequirement(requirement: Requirement): Long
@@ -38,7 +30,7 @@ interface AppDao {
     fun deleteRequirement(requirement: Requirement)
 
     //Toods
-    @Query("SELECT * FROM todo")
+    @Query("SELECT * FROM todo_table")
     fun getAllToDo(): LiveData<List<ToDo>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addToDo(todo: ToDo): Long

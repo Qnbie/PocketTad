@@ -7,16 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
+import hu.bme.aut.eo1lg5.pockettad.fragments.detail.SubjectDetailFragmentDirections
+import kotlinx.android.synthetic.main.reqlist_listitem.view.*
 
 class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewHolder>() {
     private var requirementList= emptyList<Requirement>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemName: TextView = view.findViewById(R.id.itemName)
-        val parentLayout: RelativeLayout = view.findViewById(R.id.baseLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,9 +32,9 @@ class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewH
         val currentItem = requirementList[position]
         holder.itemName.text = currentItem.name.toString()
 
-        holder.parentLayout.setOnClickListener(View.OnClickListener {
-            Log.d(ContentValues.TAG, "Cilck on ${requirementList.get(position).toString()}")
-            //TODO move to another activity
+        holder.itemView.reqListItem.setOnClickListener(View.OnClickListener {
+            val action = SubjectDetailFragmentDirections.actionSubjectDetailFragmentToRequirementDetailFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
         })
     }
 

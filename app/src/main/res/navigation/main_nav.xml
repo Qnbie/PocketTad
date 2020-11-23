@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_subjectDetailFragment_to_subjectUpdateFragment"
             app:destination="@id/subjectUpdateFragment" />
+        <argument
+            android:name="currentSubject"
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Subject" />
     </fragment>
     <fragment
         android:id="@+id/toDoAddFragment"
@@ -79,6 +82,9 @@
         <action
             android:id="@+id/action_requirementDetailFragment_to_toDoUpdateFragment"
             app:destination="@id/toDoUpdateFragment" />
+        <argument
+            android:name="currentRequirement"
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Requirement" />
     </fragment>
     <fragment
         android:id="@+id/subjectUpdateFragment"
@@ -88,6 +94,9 @@
         <action
             android:id="@+id/action_subjectUpdateFragment_to_subjectDetailFragment"
             app:destination="@id/subjectDetailFragment" />
+        <argument
+            android:name="currentSubject"
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Subject" />
     </fragment>
     <fragment
         android:id="@+id/requirementUpdateFragment"
@@ -97,6 +106,9 @@
         <action
             android:id="@+id/action_requirementUpdateFragment_to_requirementDetailFragment"
             app:destination="@id/requirementDetailFragment" />
+        <argument
+            android:name="currentRequirement"
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.Requirement" />
     </fragment>
     <fragment
         android:id="@+id/toDoUpdateFragment"
@@ -106,5 +118,8 @@
         <action
             android:id="@+id/action_toDoUpdateFragment_to_requirementDetailFragment"
             app:destination="@id/requirementDetailFragment" />
+        <argument
+            android:name="currentToDo"
+            app:argType="hu.bme.aut.eo1lg5.pockettad.database.model.ToDo" />
     </fragment>
 </navigation>

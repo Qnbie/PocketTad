@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
+import hu.bme.aut.eo1lg5.pockettad.fragments.lists.SubjectListFragment
+import hu.bme.aut.eo1lg5.pockettad.fragments.lists.SubjectListFragmentDirections
+import kotlinx.android.synthetic.main.sublist_listitem.view.*
 
 
 class SubjectListAdapter: RecyclerView.Adapter<SubjectListAdapter.ViewHolder>() {
@@ -18,7 +22,6 @@ class SubjectListAdapter: RecyclerView.Adapter<SubjectListAdapter.ViewHolder>() 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemName: TextView = view.findViewById(R.id.itemName)
-        val parentLayout: RelativeLayout = view.findViewById(R.id.baseLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,8 +35,9 @@ class SubjectListAdapter: RecyclerView.Adapter<SubjectListAdapter.ViewHolder>() 
         val currentItem = subjectList[position]
         holder.itemName.text = currentItem.name.toString()
 
-        holder.parentLayout.setOnClickListener(View.OnClickListener {
-            Log.d(TAG, "Cilck on ${subjectList.get(position).toString()}")
+        holder.itemView.subListItem.setOnClickListener(View.OnClickListener {
+            val action = SubjectListFragmentDirections.actionSubListFragmentToSubjectDetailFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
         })
     }
 

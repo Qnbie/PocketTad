@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.RequirementViewModel
+import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.RequirementViewModel
 import hu.bme.aut.eo1lg5.pockettad.recyclerview.RequirementListAdapter
 import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 

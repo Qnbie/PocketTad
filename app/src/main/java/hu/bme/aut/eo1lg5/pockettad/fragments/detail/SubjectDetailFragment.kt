@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.RequirementViewModel
+import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.RequirementViewModel
 import hu.bme.aut.eo1lg5.pockettad.recyclerview.RequirementListAdapter
 import kotlinx.android.synthetic.main.fragment_subject_detail.view.*
 
@@ -18,12 +19,17 @@ import kotlinx.android.synthetic.main.fragment_subject_detail.view.*
 class SubjectDetailFragment : Fragment() {
 
     private lateinit var requirementViewModel: RequirementViewModel
+    private val args by navArgs<SubjectDetailFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_subject_detail, container, false)
+
+        view.subjectName.setText(args.currentSubject.name)
+        view.subjectDesc.setText(args.currentSubject.description)
+        view.subjectWeb.setText(args.currentSubject.webpage)
 
         val adapter =
             RequirementListAdapter()
@@ -38,6 +44,11 @@ class SubjectDetailFragment : Fragment() {
 
         view.addRequirement.setOnClickListener{
             findNavController().navigate(R.id.action_subjectDetailFragment_to_requirementAddFragment)
+        }
+
+        view.updateSubject.setOnClickListener {
+            val action = SubjectDetailFragmentDirections.actionSubjectDetailFragmentToSubjectUpdateFragment(args.currentSubject)
+            findNavController().navigate(action)
         }
 
         return view

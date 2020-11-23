@@ -5,19 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import hu.bme.aut.eo1lg5.pockettad.R
-import hu.bme.aut.eo1lg5.pockettad.database.SubjectViewModel
-import hu.bme.aut.eo1lg5.pockettad.database.ToDoViewModel
-import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
+import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.ToDoViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
-import kotlinx.android.synthetic.main.fragment_subject_add.*
 import kotlinx.android.synthetic.main.fragment_subject_add.view.*
 import kotlinx.android.synthetic.main.fragment_to_do_add.*
-import java.time.Instant
-import java.util.*
 
 
 class ToDoAddFragment : Fragment() {

@@ -10,4 +10,5 @@
     <string name="update">Update</string>
     <string name="add_requiement">Add Requiement</string>
     <string name="add_todo">Add ToDo</string>
+    <string name="edit">Edit</string>
 </resources>
