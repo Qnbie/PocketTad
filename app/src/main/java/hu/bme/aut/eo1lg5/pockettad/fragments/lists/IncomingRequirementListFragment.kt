@@ -34,7 +34,7 @@ class IncomingRequirementListFragment : Fragment() {
         //ViewModel
         requirementViewModel = ViewModelProvider(this).get(RequirementViewModel::class.java)
         requirementViewModel.readAllData.observe(viewLifecycleOwner, Observer { requirement->
-            adapter.setReqList(requirement,requirementViewModel)
+            adapter.setReqList(requirement,requirementViewModel,true)
         })
 
         return view

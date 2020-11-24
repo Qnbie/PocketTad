@@ -123,10 +123,18 @@
         android:id="@+id/incomingToDoListFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.lists.IncomingToDoListFragment"
         android:label="Incoming_ToDos"
-        tools:layout="@layout/fragment_incoming_to_do_list" />
+        tools:layout="@layout/fragment_incoming_to_do_list" >
+        <action
+            android:id="@+id/action_incomingToDoListFragment_to_toDoUpdateFragment"
+            app:destination="@id/toDoUpdateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/incomingRequirementListFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.lists.IncomingRequirementListFragment"
         android:label="Incoming Requirements"
-        tools:layout="@layout/fragment_incoming_requirement_list" />
+        tools:layout="@layout/fragment_incoming_requirement_list" >
+        <action
+            android:id="@+id/action_incomingRequirementListFragment_to_requirementDetailFragment"
+            app:destination="@id/requirementDetailFragment" />
+    </fragment>
 </navigation>

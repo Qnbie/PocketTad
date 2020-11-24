@@ -32,7 +32,7 @@ class IncomingToDoListFragment : Fragment() {
         //ViewModel
         todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
         todoViewModel.readAllData.observe(viewLifecycleOwner, Observer { todo->
-            adapter.setToDoList(todo, todoViewModel)
+            adapter.setToDoList(todo, todoViewModel,true)
         })
 
 

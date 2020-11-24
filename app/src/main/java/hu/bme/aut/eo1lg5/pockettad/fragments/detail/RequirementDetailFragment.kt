@@ -36,7 +36,7 @@ class RequirementDetailFragment : Fragment() {
         toDoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
         args.currentRequirement?.id?.let {
             toDoViewModel.getToDoByReqId(it).observe(viewLifecycleOwner, Observer { todo->
-                adapter.setToDoList(todo,toDoViewModel)
+                adapter.setToDoList(todo,toDoViewModel,false)
             })
         }
 

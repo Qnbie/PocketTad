@@ -6,18 +6,23 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.Switch
 import android.widget.TextView
+import androidx.navigation.NavAction
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.ToDoViewModel
 import hu.bme.aut.eo1lg5.pockettad.fragments.detail.RequirementDetailFragmentDirections
+import hu.bme.aut.eo1lg5.pockettad.fragments.lists.IncomingToDoListFragment
+import hu.bme.aut.eo1lg5.pockettad.fragments.lists.IncomingToDoListFragmentDirections
 import kotlinx.android.synthetic.main.todolist_listitem.view.*
 
 
 class ToDoListAdapter: RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
     private var toDoList= emptyList<ToDo>()
     private lateinit var todoViewModel: ToDoViewModel
+    private var incoming  = false
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemName: TextView = view.findViewById(R.id.itemName)
@@ -40,13 +45,17 @@ class ToDoListAdapter: RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
         holder.switchDone.setChecked(currentItem.done)
 
         holder.itemView.todoListItem.setOnClickListener(View.OnClickListener {
-            val action = RequirementDetailFragmentDirections.actionRequirementDetailFragmentToToDoUpdateFragment(currentItem)
+            val action:NavDirections
+
+            if(incoming) action = IncomingToDoListFragmentDirections.actionIncomingToDoListFragmentToToDoUpdateFragment(currentItem)
+            else action = RequirementDetailFragmentDirections.actionRequirementDetailFragmentToToDoUpdateFragment(currentItem)
+
             holder.itemView.findNavController().navigate(action)
         })
 
         holder.switchDone.setOnCheckedChangeListener{ compoundButton: CompoundButton, b: Boolean ->
             val updatedItem = currentItem
-            updatedItem.done = !updatedItem.done
+            updatedItem.done = b
             todoViewModel.updateToDo(updatedItem)
         }
 
@@ -58,9 +67,11 @@ class ToDoListAdapter: RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
 
     fun setToDoList(
         toDo: List<ToDo>,
-        todoViewModel: ToDoViewModel
+        todoViewModel: ToDoViewModel,
+        incoming: Boolean
     ){
         this.todoViewModel = todoViewModel
+        this.incoming = incoming
         toDoList = toDo
         notifyDataSetChanged()
     }
