@@ -12,11 +12,8 @@ import androidx.navigation.fragment.navArgs
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.ToDoViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
-import kotlinx.android.synthetic.main.fragment_requirement_update.view.bUpdate
-import kotlinx.android.synthetic.main.fragment_subject_update.view.*
 import kotlinx.android.synthetic.main.fragment_to_do_update.*
 import kotlinx.android.synthetic.main.fragment_to_do_update.view.*
-import kotlinx.android.synthetic.main.fragment_to_do_update.view.bDelete
 
 
 class ToDoUpdateFragment : Fragment() {
@@ -50,16 +47,10 @@ class ToDoUpdateFragment : Fragment() {
     private fun updateToDo(){
         val name = updateToDoName.text.toString()
         val desc = updateToDoDesc.text.toString()
+        val date = "${datePicker.year}-${datePicker.month}-${datePicker.dayOfMonth}"
 
-        val updatedToDo = args.currentToDo?.done?.let {
-            ToDo(
-                args.currentToDo!!.id, args.currentToDo!!.requirementId,name,desc,
-                it
-            )
-        }
-        if (updatedToDo != null) {
-            toDoViewModel.updateToDo(updatedToDo)
-        }
+        val updatedToDo = ToDo(args.currentToDo!!.id, args.currentToDo!!.requirementId,name,desc,date, args.currentToDo!!.done)
+        toDoViewModel.updateToDo(updatedToDo)
         findNavController().navigateUp()
     }
 

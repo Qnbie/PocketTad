@@ -24,6 +24,12 @@
         <action
             android:id="@+id/action_subListFragment_to_subjectUpdateFragment"
             app:destination="@id/subjectUpdateFragment" />
+        <action
+            android:id="@+id/action_subListFragment_to_incomingToDoListFragment"
+            app:destination="@id/incomingToDoListFragment" />
+        <action
+            android:id="@+id/action_subListFragment_to_incomingRequirementListFragment"
+            app:destination="@id/incomingRequirementListFragment" />
     </fragment>
     <fragment
         android:id="@+id/subjectDetailFragment"
@@ -113,4 +119,14 @@
             app:nullable="true"
             android:defaultValue="@null"/>
     </fragment>
+    <fragment
+        android:id="@+id/incomingToDoListFragment"
+        android:name="hu.bme.aut.eo1lg5.pockettad.fragments.lists.IncomingToDoListFragment"
+        android:label="Incoming_ToDos"
+        tools:layout="@layout/fragment_incoming_to_do_list" />
+    <fragment
+        android:id="@+id/incomingRequirementListFragment"
+        android:name="hu.bme.aut.eo1lg5.pockettad.fragments.lists.IncomingRequirementListFragment"
+        android:label="Incoming Requirements"
+        tools:layout="@layout/fragment_incoming_requirement_list" />
 </navigation>

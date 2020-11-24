@@ -37,9 +37,9 @@ class ToDoAddFragment : Fragment() {
     private fun insertToDoToDatabase() {
         val name = addToDoName.text.toString()
         val desc = addToDoDesc.text.toString()
+        val date = "${datePicker.year}-${datePicker.month}-${datePicker.dayOfMonth}"
 
-
-        val todo = ToDo(null, args.requirementId, name, desc, false)
+        val todo = ToDo(null, args.requirementId, name, desc, date, false)
         todoViewModel.addToDo(todo)
         //findNavController().navigate(R.id.action_toDoAddFragment_to_requirementDetailFragment)
         findNavController().navigateUp()

@@ -13,4 +13,12 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="done">Done</string>
+    <string name="dead_line">Dead Line</string>
+    <string name="title_activity_incomming_event">MainActivity</string>
+    <string name="title_activity_incomming_events">IncommingEventsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="incomming_todo">Incomming ToDo</string>
+    <string name="incomming_requirement">Incomming Requirement</string>
+    <string name="subject_list">Subject List</string>
 </resources>

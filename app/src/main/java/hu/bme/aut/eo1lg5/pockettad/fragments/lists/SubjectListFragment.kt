@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.SubjectViewModel
 import hu.bme.aut.eo1lg5.pockettad.recyclerview.SubjectListAdapter
+import kotlinx.android.synthetic.main.fragment_subject_list.*
 import kotlinx.android.synthetic.main.fragment_subject_list.view.*
 
 class SubjectListFragment : Fragment() {
@@ -40,6 +41,15 @@ class SubjectListFragment : Fragment() {
 
         view.fabAdd.setOnClickListener{
             findNavController().navigate(R.id.action_subListFragment_to_subAddFragment)
+        }
+
+
+        view.bottomNavigationView.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.incommingToDo -> findNavController().navigate(R.id.action_subListFragment_to_incomingToDoListFragment)
+                R.id.incommingReq -> findNavController().navigate(R.id.action_subListFragment_to_incomingRequirementListFragment)
+            }
+            true
         }
 
         return view

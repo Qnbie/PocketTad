@@ -40,7 +40,7 @@ class SubjectDetailFragment : Fragment() {
         requirementViewModel = ViewModelProvider(this).get(RequirementViewModel::class.java)
         args.currentSubject?.id?.let {
             requirementViewModel.getReqBySubId(it).observe(viewLifecycleOwner, Observer { requirement->
-                adapter.setReqList(requirement)
+                adapter.setReqList(requirement, requirementViewModel)
             })
         }
 

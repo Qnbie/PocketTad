@@ -14,7 +14,6 @@ import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.RequirementViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
 import kotlinx.android.synthetic.main.fragment_requirement_update.*
 import kotlinx.android.synthetic.main.fragment_requirement_update.view.*
-import kotlinx.android.synthetic.main.fragment_subject_update.view.bUpdate
 
 class RequirementUpdateFragment : Fragment() {
 
@@ -47,16 +46,10 @@ class RequirementUpdateFragment : Fragment() {
     private fun updateRequirement(){
         val name = updateReqName.text.toString()
         val desc = updateReqDesc.text.toString()
+        val date = "${datePicker.year}-${datePicker.month}-${datePicker.dayOfMonth}"
 
-        val updatedRequirement = args.currentRequirement?.done?.let {
-            Requirement(
-                args.currentRequirement!!.id, args.currentRequirement!!.subjectId,name,desc,
-                it
-            )
-        }
-        if (updatedRequirement != null) {
-            requirementViewModel.updateRequirement(updatedRequirement)
-        }
+        val updatedRequirement = Requirement( args.currentRequirement!!.id, args.currentRequirement!!.subjectId,name,desc,date, args.currentRequirement!!.done)
+        requirementViewModel.updateRequirement(updatedRequirement)
         findNavController().navigateUp()
     }
 

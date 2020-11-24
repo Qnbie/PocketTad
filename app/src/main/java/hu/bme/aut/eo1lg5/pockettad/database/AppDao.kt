@@ -48,4 +48,6 @@ interface AppDao {
     fun deleteToDoByReqId(reqId: Long?)
     @Query("DELETE FROM todo_table WHERE requirementId IN (SELECT id FROM requirement_table WHERE subjectId = :subId)")
     fun deleteToDoBySubId(subId: Long?)
+    @Query("SELECT * FROM todo_table WHERE date(deadLine)-date(:now) >= :day")
+    fun getIncomingToDo(day: Int, now: String): LiveData<List<ToDo>>
 }

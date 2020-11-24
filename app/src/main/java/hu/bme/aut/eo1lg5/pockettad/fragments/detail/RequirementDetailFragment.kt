@@ -2,7 +2,6 @@ package hu.bme.aut.eo1lg5.pockettad.fragments.detail
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Switch
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,7 +36,7 @@ class RequirementDetailFragment : Fragment() {
         toDoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
         args.currentRequirement?.id?.let {
             toDoViewModel.getToDoByReqId(it).observe(viewLifecycleOwner, Observer { todo->
-                adapter.setToDoList(todo)
+                adapter.setToDoList(todo,toDoViewModel)
             })
         }
 

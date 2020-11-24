@@ -11,9 +11,8 @@ import androidx.navigation.fragment.navArgs
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.RequirementViewModel
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
-import hu.bme.aut.eo1lg5.pockettad.fragments.detail.SubjectDetailFragmentArgs
-import kotlinx.android.synthetic.main.fragment_subject_add.view.*
-import kotlinx.android.synthetic.main.fragment_to_do_add.*
+import kotlinx.android.synthetic.main.fragment_requirement_add.*
+import kotlinx.android.synthetic.main.fragment_requirement_add.view.*
 
 
 class RequirementAddFragment : Fragment() {
@@ -36,11 +35,11 @@ class RequirementAddFragment : Fragment() {
     }
 
     private fun insertRequirementToDatabase() {
-        val name = addToDoName.text.toString()
-        val desc = addToDoDesc.text.toString()
+        val name = addReqName.text.toString()
+        val desc = addReqDesc.text.toString()
+        val date = "${datePicker.year}-${datePicker.month}-${datePicker.dayOfMonth}"
 
-
-        val requirement = Requirement(null, args.subjectId, name, desc, false)
+        val requirement = Requirement(null, args.subjectId, name, desc, date, false)
         requirementViewModel.addRequirement(requirement)
         findNavController().navigateUp()
     }

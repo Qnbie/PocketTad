@@ -11,27 +11,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.eo1lg5.pockettad.R
 import hu.bme.aut.eo1lg5.pockettad.database.viewmodel.ToDoViewModel
 import hu.bme.aut.eo1lg5.pockettad.recyclerview.ToDoListAdapter
-import kotlinx.android.synthetic.main.fragment_subject_list.view.*
+import kotlinx.android.synthetic.main.fragment_incoming_to_do_list.view.*
 
-class ToDoListFragment : Fragment() {
 
-    private lateinit var toDoListviewModel: ToDoViewModel
+class IncomingToDoListFragment : Fragment() {
+
+    private lateinit var todoViewModel: ToDoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_to_do_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_incoming_to_do_list, container, false)
 
         val adapter = ToDoListAdapter()
-        val recyclerView = view.rvListFragment
+        val recyclerView = view.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        toDoListviewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
-        toDoListviewModel.readAllData.observe(viewLifecycleOwner, Observer { todo->
-            adapter.setToDoList(todo)
+        //ViewModel
+        todoViewModel = ViewModelProvider(this).get(ToDoViewModel::class.java)
+        todoViewModel.readAllData.observe(viewLifecycleOwner, Observer { todo->
+            adapter.setToDoList(todo, todoViewModel)
         })
+
 
         return view
     }
