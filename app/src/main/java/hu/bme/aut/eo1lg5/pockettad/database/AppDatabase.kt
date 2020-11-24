@@ -7,7 +7,6 @@ import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
 
 @Database(entities = [Subject::class, ToDo::class, Requirement::class], version = 1)
-@TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao
 

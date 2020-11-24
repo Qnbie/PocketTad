@@ -122,7 +122,7 @@
     <fragment
         android:id="@+id/incomingToDoListFragment"
         android:name="hu.bme.aut.eo1lg5.pockettad.fragments.lists.IncomingToDoListFragment"
-        android:label="Incoming_ToDos"
+        android:label="Incoming ToDos"
         tools:layout="@layout/fragment_incoming_to_do_list" >
         <action
             android:id="@+id/action_incomingToDoListFragment_to_toDoUpdateFragment"

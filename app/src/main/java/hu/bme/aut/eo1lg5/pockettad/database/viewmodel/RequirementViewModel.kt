@@ -45,4 +45,5 @@ class RequirementViewModel(application: Application): AndroidViewModel(applicati
         return repository.getReqBySubId(subId)
     }
 
+
 }

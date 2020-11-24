@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import hu.bme.aut.eo1lg5.pockettad.database.model.Requirement
 import hu.bme.aut.eo1lg5.pockettad.database.model.Subject
 import hu.bme.aut.eo1lg5.pockettad.database.model.ToDo
-import java.text.SimpleDateFormat
-import java.util.*
 
 class AppRepository(private val appDao: AppDao){
 
@@ -59,11 +57,5 @@ class AppRepository(private val appDao: AppDao){
 
     fun getToDoByReqId(reqId: Long): LiveData<List<ToDo>> {
         return appDao.getToDoByReqId(reqId)
-    }
-
-    fun getIncomingToDo(day: Int): LiveData<List<ToDo>> {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val now = simpleDateFormat.format(Date())
-        return appDao.getIncomingToDo(day, now)
     }
 }

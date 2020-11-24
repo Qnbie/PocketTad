@@ -24,8 +24,10 @@ class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewH
     private var incoming = false
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        val deadLineText: TextView = view.findViewById(R.id.deadLineText)
         val itemName: TextView = view.findViewById(R.id.itemName)
         val switchDone: Switch = view.findViewById(R.id.switchDone)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,6 +39,7 @@ class RequirementListAdapter : RecyclerView.Adapter<RequirementListAdapter.ViewH
         val currentItem = requirementList[position]
         holder.itemName.text = currentItem.name.toString()
         holder.switchDone.setChecked(currentItem.done)
+        holder.deadLineText.text = currentItem.deadLine
 
         holder.itemView.reqListItem.setOnClickListener(View.OnClickListener {
             val action:NavDirections

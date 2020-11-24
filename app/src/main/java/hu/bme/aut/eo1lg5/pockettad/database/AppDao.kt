@@ -20,7 +20,7 @@ interface AppDao {
     fun deleteSubject(subject: Subject?)
 
     //Requirement
-    @Query("SELECT * FROM requirement_table")
+    @Query("SELECT * FROM requirement_table ORDER BY deadLine")
     fun getAllReq(): LiveData<List<Requirement>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addRequirement(requirement: Requirement): Long
@@ -33,8 +33,9 @@ interface AppDao {
     @Query("DELETE FROM requirement_table  WHERE subjectId = :subId")
     fun deleteReqBySubId(subId: Long?)
 
+
     //Toods
-    @Query("SELECT * FROM todo_table")
+    @Query("SELECT * FROM todo_table ORDER BY deadLine")
     fun getAllToDo(): LiveData<List<ToDo>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addToDo(todo: ToDo): Long
@@ -48,6 +49,4 @@ interface AppDao {
     fun deleteToDoByReqId(reqId: Long?)
     @Query("DELETE FROM todo_table WHERE requirementId IN (SELECT id FROM requirement_table WHERE subjectId = :subId)")
     fun deleteToDoBySubId(subId: Long?)
-    @Query("SELECT * FROM todo_table WHERE date(deadLine)-date(:now) >= :day")
-    fun getIncomingToDo(day: Int, now: String): LiveData<List<ToDo>>
 }

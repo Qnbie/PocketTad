@@ -47,8 +47,4 @@ class ToDoViewModel(application: Application): AndroidViewModel(application) {
         return repository.getToDoByReqId(reqId)
     }
 
-    fun getIncomingToDo(day: Int):LiveData<List<ToDo>>{
-        return repository.getIncomingToDo(day)
-    }
-
 }
